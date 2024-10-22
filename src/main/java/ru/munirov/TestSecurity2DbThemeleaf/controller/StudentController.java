@@ -13,15 +13,14 @@ import ru.munirov.TestSecurity2DbThemeleaf.repository.StudentRepository;
 
 import java.util.Optional;
 
-@Slf4j
 @Controller
+@Slf4j
 public class StudentController {
-
     @Autowired
     private StudentRepository studentRepository;
 
     @GetMapping("/list")
-    public ModelAndView getAllStudents(){
+    public ModelAndView getAllStudents() {
         log.info("/list -> connection");
         ModelAndView mav = new ModelAndView("list-students");
         mav.addObject("students", studentRepository.findAll());
@@ -29,7 +28,7 @@ public class StudentController {
     }
 
     @GetMapping("/addStudentForm")
-    public ModelAndView addStudentForm(){
+    public ModelAndView addStudentForm() {
         ModelAndView mav = new ModelAndView("add-student-form");
         Student student = new Student();
         mav.addObject("student", student);
@@ -47,10 +46,10 @@ public class StudentController {
         ModelAndView mav = new ModelAndView("add-student-form");
         Optional<Student> optionalStudent = studentRepository.findById(studentId);
         Student student = new Student();
-        if (optionalStudent.isPresent()) {
+        if(optionalStudent.isPresent()){
             student = optionalStudent.get();
         }
-        mav.addObject("student",student);
+        mav.addObject("student", student);
         return mav;
     }
 
@@ -58,5 +57,6 @@ public class StudentController {
     public String deleteStudent(@RequestParam Long studentId) {
         studentRepository.deleteById(studentId);
         return "redirect:/list";
+
     }
 }
