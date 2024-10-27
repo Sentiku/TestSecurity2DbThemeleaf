@@ -22,7 +22,7 @@ public class WebSecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/register/**", "/index").permitAll()
-                        .requestMatchers("/addStudentForm", "/list", "/saveStudent", "/deleteStudent", "/showUpdateForm").authenticated()
+                        .requestMatchers("/addStudentForm", "/list", "/saveStudent", "/deleteStudent", "/showUpdateForm").permitAll()
                         .requestMatchers("/users").hasRole("ADMIN"))
                 .formLogin(form -> form
                         .loginPage("/login")
